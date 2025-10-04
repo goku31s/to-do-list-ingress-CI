@@ -21,7 +21,7 @@ spec:
       containers:
       - name: webapp
         # IMPORTANT: Replace this with the path to YOUR image in Artifact Registry
-        image: us-central1-docker.pkg.dev/powerful-bounty-469218-q0/my-app-repo/3-tier-todo-app:latest
+        image: IMAGE_PLACEHOLDER
         ports:
         - containerPort: 8080
         env:
