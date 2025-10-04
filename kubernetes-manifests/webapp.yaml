@@ -5,7 +5,11 @@ kind: Deployment
 metadata:
   name: webapp-deployment
 spec:
-  replicas: 2 # Run 2 pods for availability
+  replicas: 2 # Run 2 pods for availability 
+  # --- ADD THIS STRATEGY SECTION ---
+  strategy:
+    type: Recreate
+  # ---------------------------------  
   selector:
     matchLabels:
       app: webapp
