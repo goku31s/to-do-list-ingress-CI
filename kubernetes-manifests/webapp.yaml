@@ -1,0 +1,46 @@
+# --- Webapp Deployment ---
+# This manages the Python application pods.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 2 # Run 2 pods for availability 
+  # --- ADD THIS STRATEGY SECTION ---
+  strategy:
+    type: Recreate
+  # ---------------------------------  
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        # IMPORTANT: Replace this with the path to YOUR image in Artifact Registry
+        image: IMAGE_PLACEHOLDER
+        ports:
+        - containerPort: 8080
+        env:
+          # This environment variable tells the app how to connect to the database.
+          # 'mongo-service' is the name of the Kubernetes Service we created in mongo.yaml
+        - name: MONGO_URI
+          value: "mongodb://mongo-service:27017/"
+---
+# --- Webapp Service (Load Balancer) ---
+# This exposes our webapp to the internet using a Google Cloud Load Balancer.
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  type: LoadBalancer # This is what makes it public!
+  selector:
+    app: webapp
+  ports:
+  - protocol: TCP
+    port: 80 # The port clients will connect to (e.g., http://EXTERNAL_IP)
+    targetPort: 8080 # The port the container is listening on
