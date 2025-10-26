@@ -36,6 +36,16 @@ def delete_todo(id):
     todos.delete_one({'_id': ObjectId(id)})
     return redirect(url_for('index'))
 
+@app.route('/page1')
+def page1():
+    """Render the first new page."""
+    return render_template('page1.html')
+
+@app.route('/page2')
+def page2():
+    """Render the second new page."""
+    return render_template('page2.html')
+
 if __name__ == "__main__":
     # Host 0.0.0.0 makes it accessible from outside the container
     app.run(host='0.0.0.0', port=8080)
