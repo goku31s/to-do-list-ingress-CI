@@ -7,7 +7,7 @@ on:
 env:
   # --- IMPORTANT: REPLACE THESE VALUES ---
   DOCKER_IMAGE_NAME: goku431/3-tier-todo-app
-  MANIFEST_REPO: goku31s/to-do-list-CD  
+  MANIFEST_REPO: goku31s/to-do-list-ingress-CD
   # --- END OF VALUES TO REPLACE ---
 
 jobs:
